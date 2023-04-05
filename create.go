@@ -129,7 +129,7 @@ func Create(db *gorm.DB) {
 								case reflect.Struct:
 									if field.PrimaryKey && field.AutoIncrement {
 										if id, err := result.LastInsertId(); err == nil {
-											if err := field.Set(insertTo, id); err != nil {
+											if err := field.Set(stmt.Context,insertTo, id); err != nil {
 												db.AddError(err)
 											}
 										} else {
